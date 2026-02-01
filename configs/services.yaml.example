@@ -1,0 +1,14 @@
+# Global config
+check_interval: 30s
+timeout: 10s
+log_level: info
+
+# List of services/servers to monitor
+services:
+  - name: "Service name"
+    type: <http/ping>
+    target: <url/IP>
+    expected_status: 200 # only for http type
+    
+  - ...
+  - ...
