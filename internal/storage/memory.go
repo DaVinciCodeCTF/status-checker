@@ -24,7 +24,7 @@ func (m *MemoryStorage) Store(result checker.CheckResult) {
 }
 
 func (m *MemoryStorage) GetAll() map[string]checker.CheckResult {
-	m.mu.Lock()
+	m.mu.RLock()
 	defer m.mu.RUnlock()
 
 	// Copy to avoid race conditions
