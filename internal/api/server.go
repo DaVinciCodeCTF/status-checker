@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/DaVinciCodeCTF/status-checker/internal/crypto"
 	"github.com/DaVinciCodeCTF/status-checker/internal/storage"
 )
 
@@ -12,9 +13,9 @@ type Server struct {
 	port    string
 }
 
-func NewServer(store storage.Storage, port string) *Server {
+func NewServer(store storage.Storage, encryptor *crypto.Encryptor, port string) *Server {
 	return &Server{
-		handler: NewHandler(store),
+		handler: NewHandler(store, encryptor),
 		port:    port,
 	}
 }
@@ -26,3 +27,4 @@ func (s *Server) Start() error {
 	log.Printf("Starting API server on: %s...", s.port)
 	return http.ListenAndServe(":"+s.port, nil)
 }
+
